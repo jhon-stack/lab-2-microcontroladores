@@ -6,4 +6,5 @@ void blink_error();
 void blink_random();
 //esta funcion es la incial despues del estado de Idle (son dos veces)
 void blink_init();
-
+//Funcion delay utilizando los registros del timer
+void time_delay(int n);
