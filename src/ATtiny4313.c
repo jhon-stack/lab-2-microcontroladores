@@ -74,7 +74,7 @@ int main(void){
     DDRB &= ~((1 << 7) | (1 << 6) | (1 << 4) | (1 << 5));
     PORTB = 0x00;//Incializamos el puerto
     //Interrupciones configuracion para el timer
-    TCCR0A=0x00;   //Modo normnal del timer 
+    TCCR0A=0x00; //Normal 
     TCCR0B=0x00;
     TCCR0B |= (1<<CS00)|(1<<CS02); //prescaler en 1024
     TCNT0=0;//Inicializar en 0
@@ -99,26 +99,6 @@ int main(void){
 
 }//Aqui termina la funcion main(void)
 
-void delay_timer(int n){
-  
-  unsigned int i=0; 
-
-  
-  volatile int valor = n*2193;
-  if (n == 0)
-  {
-    valor = 1097;
-  }
-  TIFR|=(1<<TOV0);  
-   while(i<=valor)
-   { 
-      while((TIFR & (1 << TOV0) )==0);  //Se espera a que contador llegue de 0 a 255
-      TIFR|=(1<<TOV0);                  // Se limpia la bandera al finalizar cuenta
-      i++;                              // Se incrementa en 1
-   }
-  
-  
-}
 
 void blink_init(){
     //Apagar LEDS
